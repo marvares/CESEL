@@ -1,0 +1,241 @@
+---
+title: "Actualización del Manual de Organización y Funciones (MOF) y de las Descripciones y Perfiles de Puesto"
+subtitle: "Propuesta de Servicios"
+author: "Francisco Vargas Estrada"
+date: "2025-08-20"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    fig_caption: true
+  html_document:
+    toc: true
+    df_print: paged
+  slidy_presentation: default
+---
+
+## 1. Resumen Ejecutivo
+
+La Gerencia de Recursos Humanos de CESEL ha manifestado la necesidad de reelaborar el Manual de Organización y Funciones de toda la organización. Según la información oficial proporcionada, CESEL ha confirmado un **universo de 111 puestos vigentes**; varios de los cuales se **repiten en distintas áreas** con funciones muy similares. La presente propuesta se orienta a abordar ese volumen con un enfoque de **normalización de puestos** (deduplicación por familias y variantes).
+
+Los entregables del proyecto son un MOF actualizado y coherente, un **catálogo maestro de puestos únicos y variantes**, un **diccionario de competencias**, **matrices RACI** y un **plan de gobernanza**. Al agrupar puestos repetidos reducimos esfuerzo de redacción, mantenemos consistencia y aceleramos validación.
+
+**Duración estimada:** 9–12 semanas, dependiendo del número final de **puestos únicos** tras normalización. (Ver Sección 6.)
+
+Beneficios clave:
+- Reducción de redundancias y **consistencia transversal** entre áreas.
+- Base sólida para **selección, desempeño, capacitación** y **planes de carrera**.
+- **Trazabilidad** entre organigrama, procesos y variantes de rol por proyecto.
+
+## 2. Alcance
+### 2.1 En alcance
+- Revisión y actualización del **MOF corporativo**.
+- **Normalización del universo de 111 puestos**: consolidación en **puestos únicos (master)** + **variantes** por área/proyecto/sede.
+- Elaboración/actualización del **catálogo maestro de puestos**: propósito, funciones, KPI, autoridad, relaciones, requisitos y **competencias**.
+- **Matriz RACI** por proceso clave y por **proyecto tipo** (vial, hospitalario, minero, etc.).
+- **Diccionario de competencias** por familias y niveles.
+- **Estándares documentales** y lineamientos de gestión del cambio.
+- **Plantillas** para fichas de puesto, RACIs y anexos.
+
+### 2.2 Fuera de alcance (opcionales)
+- BPMN detallado de procesos, HRIS, valoración de puestos y bandas salariales, evaluación de desempeño y mallas de capacitación.
+
+
+
+## 3. Enfoque metodológico
+### Fase I — Descubrimiento (2–3 semanas)
+- Kick-off y plan de trabajo.
+- Inventario desde el Excel (111 filas): **etiquetado** por **familia** (p. ej., Supervisión, QA/QC, HSE, Geotecnia, Contratos, Planeamiento, Administración, RR.HH., Comercial, TI), **nivel** (analista/especialista/jefe/gerente) y **variante** (área/proyecto/sede).
+- **Entrevistas** y **focus groups** (muestras por **puesto único** y por **variante** relevante).
+- Mapa de **dolores** y riesgos (solapamientos, huecos, puntos de control).
+- Benchmark sectorial.
+
+**Entregables Fase I:** Informe de diagnóstico; **taxonomía de puestos** (master vs. variantes); plan de priorización.
+
+### Fase II — Diseño (3–4 semanas)
+- Rediseño estructural del **MOF**.
+- Diseño del **catálogo maestro** (fichas master) y **anexos de variantes** (diferencias específicas por área/proyecto/sede).
+- Definición de **competencias** por familia/rol con niveles y evidencias.
+- **Matrices RACI** por proceso y proyecto tipo.
+- Definición de **KPI** por rol y por variante cuando aplique.
+
+**Entregables Fase II:** Borrador MOF; 100% fichas master; anexos de variantes; diccionario de competencias; RACIs; KPI.
+
+### Fase III — Validación (2 semanas)
+- Talleres con dueños de proceso y RR.HH., validación **por familias** para acelerar.
+- Ajustes y verificación con requisitos del SGI y contractuales.
+
+**Entregables Fase III:** Versión candidata del MOF y catálogo; actas de validación.
+
+### Fase IV — Implementación y Cierre (1–3 semanas)
+- Plan de comunicación interna y sesiones de difusión.
+- Paquete de plantillas y guía de estilo.
+- Plan de **mantenimiento** y gobernanza documental.
+
+**Entregables Fase IV:** MOF y Catálogo aprobados; guía de gestión documental; plan de mantenimiento; kit de comunicación.
+
+
+
+## 4. Productos y entregables
+1. **MOF actualizado** (PDF y editables): índice, disposiciones generales, estructura, funciones por unidad y puesto, relaciones internas/externas, anexos.
+2. **Catálogo de puestos** (editables): propósito, funciones clave, KPI sugeridos, requisitos, competencias (matriz), relaciones, riesgos y controles.
+3. **Diccionario de competencias** con niveles y evidencias.
+4. **Matriz RACI** por proceso y proyecto tipo.
+5. **Guía de gestión documental** (nomenclatura, versionado, ciclo de vida, control, responsabilidades).
+6. **Plan de comunicación y sensibilización** + materiales (piezas de comunicación y deck instruccional).
+7. **Bitácora de decisiones** y trazabilidad de cambios.
+
+
+
+## 5. Supuestos clave
+- Acceso a la documentación vigente (organigrama, procedimientos, formatos, perfiles actuales, informes de auditoría relevantes).
+- Designación por CESEL de un **Sponsor** (Gerencia) y un **Comité de Validación** (RR.HH. + Dueños de Proceso).
+- Disponibilidad de **horas de entrevistas** con roles críticos.
+- Aprobaciones en plazos acordados para mantener el cronograma.
+
+
+
+## 6. Cronograma y volumetría
+La duración dependerá del número de **puestos únicos (U)** tras normalizar los 111 puestos.
+
+- **Escenario A: U ≈ 60–70** → **9–10 semanas**
+  - I: 2 semanas | II: 3–4 semanas | III: 2 semanas | IV: 2 semanas
+- **Escenario B: U ≈ 80–90** → **11–12 semanas**
+  - I: 2–3 semanas | II: 4–5 semanas | III: 2 semanas | IV: 2 semanas
+
+**Paralelización:** El **profesional junior** ejecutará levantamiento y entrevistas, curará evidencias y preparará borradores de fichas, mientras el consultor líder asegura metodología, calidad y validación con stakeholders.
+
+**Ritmo de validación:** por **familias** de rol y por **proyecto tipo**, para aprobar en bloques y acelerar cierre.
+
+
+
+## 7. Equipo y gobernanza del proyecto
+- **Consultor Líder (usted):** dirección metodológica, diseño del MOF, catálogo, competencias, RACIs, aseguramiento de calidad y relación con Comité de Validación.
+- **Profesional Junior (apoyo):** inventario Excel, entrevistas, sistematización, redacción inicial de fichas, control documental, trazabilidad de cambios.
+- **Líder RR.HH. (CESEL):** coordinación interna, control de cambios y comunicaciones.
+- **Dueños de Proceso:** validación funcional.
+- **Comité de Validación:** aprobaciones y resolución de controversias.
+
+**Cadencia:** reunión semanal de avance; tablero de acciones; hitos de aprobación por fase y por familia de puesto.
+
+
+
+## 8. Metodologías y marcos de referencia
+- Gestión por procesos y enfoque de riesgos.
+- Modelo de **competencias** por familias de rol; niveles de dominio; evidencias conductuales.
+- **Matrices RACI** (Responsible, Accountable, Consulted, Informed).
+- Lineamientos de **gestión documental** (control de versiones, conservación, acceso, propietarios de documento).
+- Mejores prácticas de la industria de **ingeniería y supervisión** para roles técnicos (p. ej., Supervisor de Obra, Ingeniero Residente, QA/QC, HSE, Geotécnico, Costos y Presupuestos, Planificación, Contratos, etc.).
+
+
+
+## 9. Indicadores de éxito del proyecto
+- **100%** de puestos en alcance con ficha validada y aprobada.
+- **Cobertura RACI** de procesos clave (>95%).
+- **Cero observaciones críticas** en auditorías internas posteriores a la implementación relacionadas a roles/funciones.
+- **Satisfacción de stakeholders** (>85%) en encuesta post-implementación.
+
+
+
+## 10. Gestión del cambio y comunicación
+- Mapa de stakeholders y mensajes clave por grupo.
+- Paquete de comunicación (correo de lanzamiento, infografía del nuevo MOF, FAQ, miniguía para jefaturas).
+- Sesiones de sensibilización (1–2 horas) para mandos medios y staff clave.
+
+
+
+## 11. Entregables de ejemplo (índices y plantillas)
+### 11.1 Índice modelo del MOF
+1. Disposiciones generales  
+2. Estructura organizacional y organigrama  
+3. Funciones por unidad orgánica  
+4. **Puestos y variantes** por unidad  
+5. Relaciones de coordinación y dependencia  
+6. Indicadores y controles asociados  
+7. Anexos: glosario, RACI, diccionario de competencias, formatos
+
+### 11.2 Plantilla de Ficha de Puesto (master + variantes)
+- **Título del puesto / Código**  
+- **Propósito (master)** y **variantes** (si aplica)  
+- **KRA/KPI**  
+- **Funciones principales** (master) y **diferencias por variante**  
+- **Autoridad** y decisiones  
+- **Relaciones**  
+- **Requisitos**  
+- **Competencias** (niveles y evidencias)  
+- **Riesgos y controles**  
+- **Condiciones**  
+- **Versionado y responsable**
+
+### 11.3 Matriz RACI (por proceso y proyecto tipo)
+(Se mantiene el ejemplo, con espacio para variantes.)
+
+### 11.4 Diccionario de Competencias
+(Se mantiene, con mapeo a familias y niveles.)
+
+||||||
+| Supervisión de Obra | Aprobación de plan de calidad | Jefe de QA/QC | Gerente de Proyecto | HSE, Cliente | Equipo de Obra |
+
+### 11.4 Diccionario de Competencias (extracto ejemplo)
+- **Gestión de obra y supervisión** (N1–N4)  
+- **Gestión de contratos y claims** (N1–N4)  
+- **Normativa HSE** (N1–N4)  
+- **Control de calidad en proyectos de ingeniería** (N1–N4)  
+- **Comunicación con stakeholders** (N1–N4)
+
+
+
+## 12. Plan de calidad del proyecto
+- Criterios de revisión y aprobación por entregable.
+- Lista de verificación de consistencia (alineación a procesos, ausencia de solapamientos, claridad de límites de responsabilidad, indicadores asignados, controles definidos).
+- Control documental: nomenclatura, versionado, y registro de cambios.
+
+
+
+## 13. Cronograma y honorarios
+**Duración estimada:** 9–12 semanas conforme a la volumetría final (Sección 6).  
+**Modalidad:** tarifa fija por alcance + iteraciones de validación por familia.  
+**Propuesta económica (referencial):**
+- Fase I (Diagnóstico y Normalización): **20%**
+- Fase II (Diseño MOF + Catálogo Master/Variantes): **45%**
+- Fase III (Validación): **20%**
+- Fase IV (Implementación y Cierre): **15%**
+
+**Forma de pago:** 30% a la firma, 40% al cierre de Fase II, 30% a la aprobación final.
+
+Nota: los honorarios finales se ajustarán al **número de puestos únicos U** y a las **variantes** (área/proyecto/sede) que requieran redacciones diferenciadas.
+
+
+
+## 14. Riesgos y mitigaciones
+- **Baja disponibilidad de entrevistados:** plan alterno de horarios; cuestionarios asincrónicos.
+- **Cambios de alcance durante validación:** control de cambios con impacto en plazos y costos.
+- **Resistencia al cambio:** estrategia de comunicación temprana, quick wins, patrocinio visible.
+
+
+
+## 15. Siguientes pasos
+1. Confirmar criterios de **normalización** (qué consideraremos **variante** vs. **puesto único**).
+2. Entregar el **Excel** base (con los 111 puestos y resaltados) en formato editable y sin filtros.
+3. Acordar **familias de puesto** y **proyectos tipo**.
+4. Nombrar Sponsor y Comité de Validación.
+5. Alinear cronograma final según volumetría (Sección 6) y lanzar **kick-off**.
+
+
+
+## 16. Preguntas para alinear el trabajo (no bloqueantes)
+1. ¿Cuál es el **criterio actual** para considerar que un puesto repetido en otra área es la **misma función** vs. una **variante**? (ej.: cambios en KPI, decisiones, riesgos, requisitos).
+2. ¿Qué **familias** y **proyectos tipo** (vial, hospitalario, minero, otros) debemos priorizar?
+3. ¿Hay **perfiles críticos** que deban aprobarse primero por compromisos con clientes/auditorías?
+4. ¿Preferencias de **formato** para los entregables (Word/Excel/PowerPoint) y codificación documental vigente?
+5. ¿Necesitan la documentación en **español e inglés**?
+6. ¿Alguna restricción de **tiempos de entrevista** por obras/sedes que debamos considerar?
+
+
+
+## 17. Cierre
+Quedo a disposición para ejecutar esta actualización con foco en normalización y escalabilidad, maximizando sinergias en los 111 puestos y sus variantes.
+
+**Francisco Martín Vargas Estrada**  
+Consultor en Gestión de RR.HH. y People Analytics  
+Correo: [su correo]  |  Tel.: [su número]

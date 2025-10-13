@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Deduplicación de Puestos por Familias y Variantes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 40vh;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #7a5195, #ef5675);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .kpi-box {
+            border-left: 4px solid #ffa600;
+        }
+        .step-arrow {
+            font-size: 2rem;
+            color: #7a5195;
+            align-self: center;
+            margin: 0 1rem;
+        }
+        .career-path-item {
+            position: relative;
+            padding-left: 2.5rem;
+            padding-bottom: 2rem;
+            border-left: 2px solid #7a5195;
+        }
+        .career-path-item:last-child {
+            border-left: 2px solid transparent;
+            padding-bottom: 0;
+        }
+        .career-path-dot {
+            position: absolute;
+            left: -0.7rem;
+            top: 0.1rem;
+            height: 1.25rem;
+            width: 1.25rem;
+            background-color: #ef5675;
+            border-radius: 9999px;
+            border: 4px solid #f0f4f8;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- 
+    Narrative Plan:
+    1.  Introduction: Hook the user by highlighting the common problem of redundant and chaotic job titles.
+    2.  The Problem Visualized: Use a bubble chart to represent the disorganization of having too many similar roles.
+    3.  The Solution Explained: Introduce "Deduplication" and show the clear, step-by-step process using an HTML/CSS flowchart.
+    4.  Before vs. After: Directly compare the number of roles and structural clarity using a bar chart and simple diagrams.
+    5.  Quantifiable Impact: Showcase the tangible benefits (efficiency, cost savings, etc.) with donut charts and KPI callouts.
+    6.  The Employee Perspective: Illustrate how a structured system creates clear career paths using an HTML/CSS ladder diagram.
+    7.  Conclusion: Summarize the strategic value of this HR initiative.
+
+    Visualization Choices (No SVG, No Mermaid JS):
+    -   Problem State (Chaos): Bubble Chart (Chart.js) - To show a cluster of overlapping, similar-level roles. No SVG.
+    -   Process Flow: Flowchart (HTML/CSS with Tailwind) - To clearly outline a multi-step process. No SVG/Mermaid JS.
+    -   Before/After Comparison: Bar Chart (Chart.js) - For direct quantitative comparison of job description counts. No SVG.
+    -   Impact Metrics (Reduction): Donut Chart (Chart.js) - To show a simple, powerful percentage. No SVG.
+    -   Impact Metrics (KPIs): Bar Chart (Chart.js) - To compare multiple performance indicators. No SVG.
+    -   Career Progression: Ladder Diagram (HTML/CSS with Tailwind) - To visualize a linear, hierarchical path. No SVG.
+    
+    Color Palette: "Vibrant and Professional" - Using a base of #003f5c (dark blue) and #7a5195 (purple), with accents from #ef5675 (pink) and #ffa600 (orange).
+    -->
+
+    <div class="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2"><span class="gradient-text">Optimizando la Estructura Organizacional</span></h1>
+            <p class="text-xl text-gray-600">Entendiendo la "Deduplicación por Familias y Variantes de Puesto"</p>
+        </header>
+
+        <main class="space-y-12">
+            
+            <section id="problem">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="card">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">El Desafío: Un Mar de Puestos Redundantes</h2>
+                        <p class="mb-4">Muchas organizaciones crecen orgánicamente, creando docenas de descripciones de puestos para roles muy similares. "Analista de Finanzas Jr.", "Contador Nivel I", y "Asistente Contable" pueden describir funciones casi idénticas.</p>
+                        <p>Esta redundancia genera confusión, dificulta la gestión de salarios, y crea trayectorias profesionales poco claras, afectando la eficiencia de Recursos Humanos y la moral de los empleados.</p>
+                    </div>
+                    <div class="card">
+                         <h3 class="text-xl font-semibold text-center mb-4">Visualización del Caos de Puestos</h3>
+                        <div class="chart-container">
+                            <canvas id="chaosChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="solution">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold mb-2">La Solución: Un Proceso de Estandarización Inteligente</h2>
+                    <p class="max-w-3xl mx-auto text-gray-600 mb-8">La deduplicación es un método estratégico para analizar, agrupar y estandarizar puestos similares en una estructura coherente de "Familias" (áreas funcionales) y "Variantes" (niveles de carrera).</p>
+                </div>
+                <div class="card">
+                    <div class="flex flex-col md:flex-row justify-around items-center text-center">
+                        <div class="flex-1 p-4">
+                            <div class="text-4xl mb-2" style="color:#7a5195;">1</div>
+                            <h4 class="font-bold mb-1">Análisis de Roles</h4>
+                            <p class="text-sm text-gray-600">Inventariar y analizar las funciones y responsabilidades de todos los puestos existentes.</p>
+                        </div>
+                        <div class="step-arrow hidden md:block">&rarr;</div>
+                        <div class="flex-1 p-4">
+                             <div class="text-4xl mb-2" style="color:#bc5090;">2</div>
+                            <h4 class="font-bold mb-1">Agrupación en Familias</h4>
+                            <p class="text-sm text-gray-600">Agrupar puestos con funciones similares en familias lógicas (Ej: "Finanzas", "Marketing", "TI").</p>
+                        </div>
+                        <div class="step-arrow hidden md:block">&rarr;</div>
+                        <div class="flex-1 p-4">
+                             <div class="text-4xl mb-2" style="color:#ef5675;">3</div>
+                            <h4 class="font-bold mb-1">Definición de Variantes</h4>
+                            <p class="text-sm text-gray-600">Crear niveles de carrera estandarizados dentro de cada familia (Ej: "Analista", "Senior", "Líder", "Gerente").</p>
+                        </div>
+                         <div class="step-arrow hidden md:block">&rarr;</div>
+                        <div class="flex-1 p-4">
+                             <div class="text-4xl mb-2" style="color:#ff764a;">4</div>
+                            <h4 class="font-bold mb-1">Estandarización</h4>
+                            <p class="text-sm text-gray-600">Consolidar descripciones, competencias y rangos salariales para cada variante.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="comparison">
+                <div class="text-center mb-8">
+                     <h2 class="text-3xl font-bold mb-2">De la Complejidad a la Claridad</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="card">
+                        <h3 class="text-xl font-semibold text-center mb-4">Antes: 250+ Descripciones de Puesto Únicas</h3>
+                         <div class="p-4 border border-dashed border-gray-300 rounded-lg text-center bg-gray-50">
+                            <p class="text-gray-500">Analista Financiero Jr.</p>
+                            <p class="text-gray-500">Contador I</p>
+                            <p class="text-gray-500">Especialista Contable</p>
+                            <p class="text-gray-500">Asistente de Tesorería</p>
+                            <p class="text-gray-500">...y cientos más.</p>
+                        </div>
+                    </div>
+                     <div class="card">
+                        <h3 class="text-xl font-semibold text-center mb-4">Después: 75 Roles Estandarizados</h3>
+                         <div class="p-4 border border-solid border-purple-300 rounded-lg bg-purple-50">
+                             <p class="font-semibold text-purple-800">Familia: Finanzas</p>
+                             <ul class="list-disc list-inside ml-4 text-purple-700">
+                                 <li>Variante: Analista</li>
+                                 <li>Variante: Analista Senior</li>
+                                 <li>Variante: Líder de Equipo</li>
+                                 <li>Variante: Gerente</li>
+                             </ul>
+                         </div>
+                    </div>
+                    <div class="card md:col-span-2">
+                        <h3 class="text-xl font-semibold text-center mb-4">Reducción Drástica de la Complejidad</h3>
+                        <div class="chart-container h-64 max-h-80">
+                            <canvas id="reductionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="impact">
+                <div class="text-center mb-8">
+                     <h2 class="text-3xl font-bold mb-2">El Impacto Cuantificable del Orden</h2>
+                     <p class="max-w-3xl mx-auto text-gray-600">La simplificación estructural se traduce en mejoras medibles en la eficiencia y la estrategia de talento.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="card flex flex-col items-center justify-center text-center">
+                        <h3 class="text-xl font-semibold mb-4">Reducción de Puestos Únicos</h3>
+                        <div class="chart-container w-48 h-48 max-h-48">
+                            <canvas id="donutChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card md:col-span-2">
+                        <h3 class="text-xl font-semibold text-center mb-4">Mejora en Indicadores Clave de RRHH</h3>
+                         <div class="chart-container h-80 max-h-96">
+                            <canvas id="kpiChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="career-path">
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="card">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">Una Nueva Realidad: Trayectorias Profesionales Claras</h2>
+                        <p class="mb-4">Para los empleados, el mayor beneficio es la visibilidad. Una estructura estandarizada define claramente cómo pueden crecer dentro de la empresa, aumentando la motivación y la retención.</p>
+                        <p>Saben qué competencias necesitan desarrollar para avanzar del nivel "Analista" al "Senior", y qué implica llegar a ser "Líder" o "Gerente".</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-xl font-semibold mb-6">Ejemplo: Carrera en la Familia de "Tecnología"</h3>
+                        <div>
+                            <div class="career-path-item">
+                                <div class="career-path-dot"></div>
+                                <h4 class="font-bold">Desarrollador</h4>
+                                <p class="text-sm text-gray-600">Nivel de entrada, enfocado en ejecución de tareas y aprendizaje.</p>
+                            </div>
+                            <div class="career-path-item">
+                                <div class="career-path-dot"></div>
+                                <h4 class="font-bold">Desarrollador Senior</h4>
+                                <p class="text-sm text-gray-600">Mayor autonomía, mentoría a otros, maneja proyectos complejos.</p>
+                            </div>
+                            <div class="career-path-item">
+                                <div class="career-path-dot"></div>
+                                <h4 class="font-bold">Arquitecto de Software</h4>
+                                <p class="text-sm text-gray-600">Responsable del diseño técnico y la estrategia de alto nivel.</p>
+                            </div>
+                             <div class="career-path-item">
+                                <div class="career-path-dot"></div>
+                                <h4 class="font-bold">Gerente de Ingeniería</h4>
+                                <p class="text-sm text-gray-600">Lidera equipos, gestiona el personal y la entrega de proyectos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-16 text-gray-500 text-sm">
+            <p>&copy; 2025 Canvas Infographics. Una estructura de puestos clara es la base de una gestión de talento estratégica.</p>
+        </footer>
+
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const wrapLabel = (label) => {
+        if (typeof label === 'string' && label.length > 16) {
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16 && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+        return label;
+    };
+
+    const tooltipTitleCallback = {
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        if (Array.isArray(label)) {
+                            return label.join(' ');
+                        }
+                        return label;
+                    }
+                }
+            }
+        }
+    };
+    
+    const colors = {
+        purple: '#7a5195',
+        pink: '#ef5675',
+        orange: '#ffa600',
+        darkBlue: '#003f5c',
+        lightBlue: '#a0aee0',
+        lightPink: '#f7a8b8',
+    };
+
+    const chaosChartCtx = document.getElementById('chaosChart');
+    if (chaosChartCtx) {
+        new Chart(chaosChartCtx, {
+            type: 'bubble',
+            data: {
+                datasets: [{
+                    label: 'Puestos Redundantes',
+                    data: [
+                        {x: 1, y: 5, r: 15}, {x: 2, y: 8, r: 12}, {x: 3, y: 3, r: 18},
+                        {x: 4, y: 6, r: 10}, {x: 5, y: 2, r: 14}, {x: 6, y: 9, r: 16},
+                        {x: 7, y: 4, r: 11}, {x: 8, y: 7, r: 13}, {x: 9, y: 1, r: 17},
+                        {x: 1.5, y: 7, r: 14}, {x: 4.5, y: 3.5, r: 12}, {x: 7.5, y: 6, r: 15}
+                    ],
+                    backgroundColor: 'rgba(239, 86, 117, 0.6)',
+                    borderColor: colors.pink,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { display: false },
+                    y: { display: false }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `Puesto similar #${context.dataIndex + 1}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    const reductionChartCtx = document.getElementById('reductionChart');
+    if (reductionChartCtx) {
+        new Chart(reductionChartCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Antes de la Deduplicación', 'Después de la Deduplicación'],
+                datasets: [{
+                    label: 'Número de Descripciones de Puesto',
+                    data: [253, 75],
+                    backgroundColor: [colors.lightPink, colors.purple],
+                    borderColor: [colors.pink, colors.darkBlue],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Cantidad de Puestos Únicos' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    }
+    
+    const donutChartCtx = document.getElementById('donutChart');
+    if(donutChartCtx) {
+        new Chart(donutChartCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Puestos Eliminados', 'Puestos Estandarizados'],
+                datasets: [{
+                    data: [70, 30],
+                    backgroundColor: [colors.pink, colors.purple],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                         callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += context.parsed + '%';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                cutout: '60%',
+            }
+        });
+    }
+
+    const kpiChartCtx = document.getElementById('kpiChart');
+    if(kpiChartCtx) {
+         const labels = ['Tiempo Promedio para Contratar (Días)', 'Tasa de Movilidad Interna (%)', 'Consistencia Salarial (Índice 1-10)'];
+         const wrappedLabels = labels.map(wrapLabel);
+
+        new Chart(kpiChartCtx, {
+            type: 'bar',
+            data: {
+                labels: wrappedLabels,
+                datasets: [
+                    {
+                        label: 'Antes',
+                        data: [60, 15, 6],
+                        backgroundColor: colors.lightPink,
+                        borderColor: colors.pink,
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Después',
+                        data: [36, 25, 9],
+                        backgroundColor: colors.lightBlue,
+                        borderColor: colors.purple,
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                 scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                ...tooltipTitleCallback
+            }
+        });
+    }
+
+});
+</script>
+</body>
+</html>
