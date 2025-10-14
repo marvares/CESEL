@@ -25,10 +25,8 @@ ui <- fluidPage(
   hr(),
   h4("Información de Venta"),
   
-  # --- CHECKBOX PARA VENTA POTENCIAL ---
   checkboxInput("venta_potencial", "Venta Potencial a Futuro", FALSE),
   
-  # --- BLOQUE CONDICIONAL PARA VENTA POTENCIAL ---
   shinyjs::hidden(
     div(id = "venta_potencial_details",
         wellPanel(
@@ -164,7 +162,6 @@ server <- function(input, output, session) {
   
   valores <- reactiveValues()
   
-  # Nombres de las columnas actualizados
   columnas_nombres <- c("Nombre", "Telefono", "Email", "Fecha_Registro", "DOLO", "ID", "Sexo",
                         "Venta_Potencial", "VP_Producto", "VP_Renovacion", "VP_Monto", "VP_Fecha", "VP_Notas",
                         "New_Sale", "New_Sale_Amount", "New_Sale_Currency", "New_Sale_Currency_Otro",
@@ -191,10 +188,7 @@ server <- function(input, output, session) {
   
   output$form_title <- renderText("Agregar Nuevo Cliente")
   
-  # Lógica para campos condicionales
-  observeEvent(input$venta_potencial, {
-    if (input$venta_potencial) shinyjs::show("venta_potencial_details") else shinyjs::hide("venta_potencial_details")
-  }, ignoreNULL = FALSE)
+  observeEvent(input$venta_potencial, { if (input$venta_potencial) shinyjs::show("venta_potencial_details") else shinyjs::hide("venta_potencial_details") }, ignoreNULL = FALSE)
   observeEvent(input$new_sale, { if (input$new_sale == "Yes") shinyjs::show("new_sale_details") else shinyjs::hide("new_sale_details") }, ignoreNULL = FALSE)
   observeEvent(input$new_sale_currency, { if (input$new_sale_currency == "Otro") shinyjs::show("new_sale_currency_otro") else shinyjs::hide("new_sale_currency_otro") }, ignoreNULL = FALSE)
   observeEvent(input$new_product_sold, { if ("Otro" %in% input$new_product_sold) shinyjs::show("new_product_sold_otro") else shinyjs::hide("new_product_sold_otro") }, ignoreNULL = FALSE)
@@ -202,7 +196,6 @@ server <- function(input, output, session) {
   observeEvent(input$r2c, { if ("Other" %in% input$r2c) shinyjs::show("r2c_otro") else shinyjs::hide("r2c_otro") }, ignoreNULL = FALSE)
   observeEvent(input$producto_llamada, { if ("Otro" %in% input$producto_llamada) shinyjs::show("producto_llamada_otro") else shinyjs::hide("producto_llamada_otro") }, ignoreNULL = FALSE)
   
-  # Función para limpiar todos los campos
   clear_fields <- function() {
     updateTextInput(session, "nombre", value = ""); updateTextInput(session, "telefono", value = ""); updateTextInput(session, "email", value = "");
     updateDateInput(session, "fecha_registro", value = Sys.Date()); updateTextInput(session, "DOLO", value = ""); updateTextInput(session, "ID", value = "");
@@ -218,11 +211,9 @@ server <- function(input, output, session) {
     updateRadioButtons(session, "moneda_ultima_orden", selected = "CAD"); 
     updateCheckboxGroupInput(session, "r2c", selected = character(0)); updateCheckboxGroupInput(session, "producto_llamada", selected = character(0)); 
     updateTextAreaInput(session, "notas_venta", value = ""); updateRadioButtons(session, "dop", selected = "No");
-    updateNumericInput(session, "dominios_com", value = 0); updateNumericInput(session, "dominios_ca", value = 0); updateNumericInput(session, "dominios_otros", value = 0)
-    # (El resto de resets de campos numéricos iría aquí para ser completo)
+    # (El resto de resets de campos numéricos iría aquí)
   }
   
-  # --- Lógica para AGREGAR datos ---
   observeEvent(input$submit, {
     new_data <- data.frame(
       Nombre = input$nombre, Telefono = input$telefono, Email = input$email, Fecha_Registro = as.character(input$fecha_registro), DOLO = input$DOLO, ID = input$ID, Sexo = input$sexo,
@@ -256,7 +247,6 @@ server <- function(input, output, session) {
     write.csv(valores$df, archivo_csv, row.names = FALSE); clear_fields()
   })
   
-  # --- Lógica para MODIFICAR datos ---
   observeEvent(input$modify_button, {
     row_to_modify <- as.numeric(sub("modify_", "", input$modify_button)); valores$row_to_modify <- row_to_modify
     fila_datos <- valores$df[row_to_modify, ]
@@ -298,14 +288,11 @@ server <- function(input, output, session) {
     valores$df[fila, ] <- list(
       input$nombre, input$telefono, input$email, as.character(input$fecha_registro), input$DOLO, input$ID, input$sexo,
       input$venta_potencial,
-      ifelse(input$venta_potencial, input$vp_producto, ""),
-      ifelse(input$venta_potencial, input$vp_renovacion, "No"),
-      ifelse(input$venta_potencial, input$vp_monto, 0),
-      ifelse(input$venta_potencial, as.character(input$vp_fecha), ""),
+      ifelse(input$venta_potencial, input$vp_producto, ""), ifelse(input$venta_potencial, input$vp_renovacion, "No"),
+      ifelse(input$venta_potencial, input$vp_monto, 0), ifelse(input$venta_potencial, as.character(input$vp_fecha), ""),
       ifelse(input$venta_potencial, input$vp_notas, ""),
       input$new_sale, 
-      ifelse(input$new_sale == "Yes", input$new_sale_amount, 0),
-      ifelse(input$new_sale == "Yes", input$new_sale_currency, "CAD"),
+      ifelse(input$new_sale == "Yes", input$new_sale_amount, 0), ifelse(input$new_sale == "Yes", input$new_sale_currency, "CAD"),
       ifelse(input$new_sale == "Yes", input$new_sale_currency_otro, ""),
       ifelse(input$new_sale == "Yes", paste(input$new_product_sold, collapse = ", "), ""),
       ifelse(input$new_sale == "Yes", input$new_product_sold_otro, ""),
@@ -342,7 +329,6 @@ server <- function(input, output, session) {
   
   # --- Lógica para Resúmenes ---
   
-  # Resumen de llamada actual
   summary_text <- reactive({
     r2c_text <- if (!is.null(input$r2c)) paste(input$r2c, collapse = ", ") else "N/A"
     if ("Other" %in% input$r2c) { r2c_text <- sub("Other", paste0("Other (", input$r2c_otro, ")"), r2c_text) }
@@ -360,23 +346,33 @@ server <- function(input, output, session) {
   output$call_summary_text <- renderText({ summary_text() })
   output$copy_button_ui <- renderUI({ rclipButton("copy_summary", "Copiar Resumen", clipText = summary_text(), icon = icon("clipboard")) })
   
-  # Resumen de venta potencial
+  # Resumen de venta potencial (CON PLANTILLAS ACTUALIZADAS)
   vp_summary_text <- reactive({
     req(input$venta_potencial == TRUE)
+    
     outlook_summary <- paste(
       "Seguimiento Venta Futura:", input$vp_producto, "para", input$nombre, "\n",
       "-----------------------------------\n",
-      "Cliente ID:", input$ID, "\n", "Email:", input$email, "\n", "Teléfono:", input$telefono, "\n",
-      "Monto Esperado:", input$vp_monto, "\n", "-----------------------------------\n",
-      "Anotaciones:", "\n", input$vp_notas
+      "Cliente ID:", input$ID, "\n",
+      "Email:", input$email, "\n",
+      "Teléfono:", input$telefono, "\n",
+      "Monto Esperado:", input$vp_monto, "\n",
+      "Fecha Esperada de Venta:", as.character(input$vp_fecha), "\n", # <-- Campo añadido
+      "-----------------------------------\n",
+      "Anotaciones:", "\n",
+      input$vp_notas
     )
-    email_draft <- paste(
-      "Subject: Seguimiento sobre", input$vp_producto, "\n\n",
-      "Hola", strsplit(input$nombre, " ")[[1]][1], ",\n\n",
-      "Espero que te encuentres bien.\n\n",
-      "Te escribo para hacer seguimiento a nuestra conversación sobre tu interés en", input$vp_producto, ".\n\n",
-      "[Añadir aquí más detalles personalizados]\n\n", "Saludos cordiales,"
+    
+    email_draft <- paste0(
+      "Subject: SUIVI DE VOTRE APPEL GODADDY DE ", as.character(input$fecha_registro), "\n\n",
+      "Bonjour:\n\n",
+      "C'est Francisco, Guide GoDaddy. On vient de parler de ", input$vp_producto, ".\n\n",
+      "Si vous êtes intéressé(e), vous pouvez me communiquer vos disponibilités et le numéro de téléphone. ",
+      "Je vous rappellerai aux meilleurs délais. En tout cas, si vous recevez une communication concernant notre interaction, ",
+      "j'apprécierais beaucoup votre soutien en m'attribuant la note de 10 aux deux questions, ",
+      "car elles reflètent toutes deux ma performance. Merci !"
     )
+    
     paste("*** PARA CITA DE OUTLOOK ***\n", outlook_summary, "\n\n\n", "*** BORRADOR DE CORREO ELECTRÓNICO ***\n", email_draft)
   })
   output$vp_summary_text <- renderText({ if (input$venta_potencial) { vp_summary_text() } else { "" } })
