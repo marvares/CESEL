@@ -1,0 +1,17 @@
+---
+title: "Notas de Desarrollo Formulario GD"
+author: "Martín Vargas Estrada"
+date: "2025-10-15"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Notas de Desarrollo
+
+1. Añadir campo para especificar monto y producto en el caso en que haya venta durante la llamada
+2. Corregir los campos de fecha para que el formato sea DDMMAA
+3. Corregir "Otro" en R2C para que sea "Other"
+4. Arreglar el problema del csv que crashea el formulario cuando se quiere añadir campos nuevos y se graba un nuevo caso. ¿Crear csvs por día?
