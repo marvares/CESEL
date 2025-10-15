@@ -10,7 +10,7 @@ ui <- fluidPage(
   theme = bs_theme(bootswatch = "darkly"),
   useShinyjs(),
   rclipboardSetup(), # <-- Inicializar la función de copiado
-  titlePanel("Gestor de Clientes"),
+  titlePanel("Centro de Lornitas"),
   
   # Sección del formulario
   h4(textOutput("form_title")),
@@ -186,7 +186,7 @@ server <- function(input, output, session) {
     valores$df <- df_vacio
   }
   
-  output$form_title <- renderText("Agregar / Editar Cliente")
+  output$form_title <- renderText("Agregar / Editar Lorna")
   
   observeEvent(input$venta_potencial, { if (input$venta_potencial) shinyjs::show("venta_potencial_details") else shinyjs::hide("venta_potencial_details") }, ignoreNULL = FALSE)
   observeEvent(input$new_sale, { if (input$new_sale == "Yes") shinyjs::show("new_sale_details") else shinyjs::hide("new_sale_details") }, ignoreNULL = FALSE)
